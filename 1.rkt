@@ -60,6 +60,7 @@
 (define (abs x)
   (if (<= x 0) (- x) x))
 
+
 (define (good-enough? guess next-guess)
   (let ((diff (- guess next-guess)))
     (<= (abs diff) (/ 1 100))))
@@ -77,21 +78,47 @@
 (sqrt -1)
 
 
-
 (define (cbrt-iter guess x)
   (if (< x 0) "don't do that :<"
       (let ((next-guess (/ (+ (* 2 guess) (/ x (square guess)) ) 3)))
         (if (good-enough? guess next-guess) next-guess (cbrt-iter next-guess x)))))
 
 (define (cbrt x)
-  (cbrt-iter 1.0 x)
-  )
+  (cbrt-iter 1.0 x))
 
-(cbrt -1)
-
+(cbrt 27)
 
 
 
+#|
+(define (+ a b)
+  (if (= a 0) b (inc (+ (dec a) b))))
+                      ^ no tco
+
+
+(define (+ a b)
+  (if (= a 0) b (+ (dec a) (inc b))))
+                 ^ last exp, tco
+|#
+
+
+(define (A x y)
+  (cond ((= y 0) 0)
+        ((= x 0) (* 2 y))
+        ((= y 1) 2)
+        (else (A (- x 1) (A x (- y 1))))))
+#|
+(A 0 n)
+(* 2 n)
+
+(A 1 n)
+
+
+|#
+
+(A 1 2)
+(A 2 4)
+(A 3 3)
 
 
 
